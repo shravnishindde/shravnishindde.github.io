@@ -7,15 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #0a0a0f;
-      --surface: #12121a;
-      --border: #1e1e2e;
-      --accent: #7c6af7;
-      --accent2: #f7a26a;
-      --accent3: #6af7c8;
-      --text: #e8e8f0;
-      --muted: #6b6b8a;
-      --card: #13131e;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --accent: #4f46e5;
+      --accent2: #c2410c;
+      --accent3: #0f766e;
+      --accent4: #b45309;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,35 +32,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    /* ── GLOW BLOBS ── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.12;
-      pointer-events: none;
-      z-index: 0;
-      animation: blobFloat 12s ease-in-out infinite alternate;
-    }
-    .blob-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; left: -100px; animation-delay: 0s; }
-    .blob-2 { width: 400px; height: 400px; background: var(--accent2); bottom: 100px; right: -100px; animation-delay: 4s; }
-    .blob-3 { width: 300px; height: 300px; background: var(--accent3); top: 50%; left: 40%; animation-delay: 8s; }
-
-    @keyframes blobFloat {
-      0%   { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(30px, 40px) scale(1.1); }
-    }
-
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -69,7 +41,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.2rem 4rem;
-      background: rgba(10,10,15,0.7);
+      background: rgba(248,250,252,0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
@@ -114,7 +86,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent3);
-      border: 1px solid rgba(106,247,200,0.3);
+      border: 1px solid rgba(15,118,110,0.3);
       padding: 0.3rem 0.9rem;
       border-radius: 100px;
       margin-bottom: 1.5rem;
@@ -166,7 +138,7 @@
       background: var(--accent);
       color: #fff;
     }
-    .btn-primary:hover { background: #6a59e6; transform: translateY(-2px); }
+    .btn-primary:hover { background: #4338ca; transform: translateY(-2px); }
     .btn-outline {
       background: transparent;
       border: 1px solid var(--border);
@@ -237,36 +209,76 @@
       color: var(--accent);
       transform: translateY(-2px);
     }
-    .skill-chip.lang  { border-color: rgba(124,106,247,0.3); }
-    .skill-chip.tool  { border-color: rgba(247,162,106,0.3); }
-    .skill-chip.db    { border-color: rgba(106,247,200,0.3); }
+    .skill-chip.lang  { border-color: rgba(79,70,229,0.3); }
+    .skill-chip.tool  { border-color: rgba(194,65,12,0.3); }
+    .skill-chip.db    { border-color: rgba(15,118,110,0.3); }
 
     /* ── PROJECTS ── */
+    .project-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: 0.55rem 1.3rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.3rem;
     }
 
     .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.8rem;
-      transition: all 0.3s;
       position: relative;
-      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 1.5rem 1.6rem;
+      cursor: pointer;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(124,106,247,0.05), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 16px 36px rgba(15,23,42,0.08); }
+    .project-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .project-card.hidden-by-filter { display: none; }
+
+    .project-card-title-sm {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.3;
+      margin: 0.6rem 0 0.5rem;
     }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(124,106,247,0.12); }
-    .project-card:hover::before { opacity: 1; }
+    .project-card-blurb {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .card-hint {
+      display: inline-block;
+      margin-top: 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 0.8;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .project-card:hover .card-hint,
+    .project-card:focus-visible .card-hint { opacity: 1; transform: translateX(3px); }
 
     .project-badge {
       display: inline-block;
@@ -277,28 +289,11 @@
       border-radius: 100px;
       margin-bottom: 1rem;
     }
-    .badge-major { background: rgba(124,106,247,0.15); color: var(--accent); }
-    .badge-mini  { background: rgba(106,247,200,0.1); color: var(--accent3); }
-    .badge-live  { background: rgba(247,162,106,0.1); color: var(--accent2); }
+    .badge-major  { background: rgba(79,70,229,0.12); color: var(--accent); }
+    .badge-mini   { background: rgba(15,118,110,0.1); color: var(--accent3); }
+    .badge-live   { background: rgba(194,65,12,0.1); color: var(--accent2); }
+    .badge-client { background: rgba(180,83,9,0.12); color: var(--accent4); }
 
-    .project-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      letter-spacing: -0.02em;
-    }
-    .project-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
     .project-tag {
       font-size: 0.72rem;
       padding: 0.2rem 0.6rem;
@@ -371,7 +366,7 @@
     .cert-icon {
       width: 40px; height: 40px;
       border-radius: 8px;
-      background: rgba(247,162,106,0.12);
+      background: rgba(194,65,12,0.12);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.2rem;
       flex-shrink: 0;
@@ -422,6 +417,126 @@
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ── PROJECT DETAILS MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(15,23,42,0.5);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+
+    .modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 620px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.6rem;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+
+    .modal-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+    .modal-close:focus-visible { outline: 2px solid var(--accent); }
+
+    .modal-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      margin: 0.7rem 0 1rem;
+      padding-right: 2rem;
+    }
+    .modal-summary { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.6rem; }
+    .modal-heading {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .modal-highlights { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.6rem; }
+    .modal-highlights li {
+      font-size: 0.87rem;
+      color: var(--text);
+      line-height: 1.6;
+      padding-left: 1.3rem;
+      position: relative;
+    }
+    .modal-highlights li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent3);
+      font-size: 0.8rem;
+    }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.6rem; }
+    .modal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .modal-link:hover { color: var(--accent2); }
+    .modal-private-note { font-size: 0.8rem; font-style: italic; color: var(--muted); }
+
+    .modal-image-wrap {
+      display: block;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1.6rem;
+      border: 1px solid var(--border);
+    }
+    .modal-image-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .modal-image-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(79,70,229,0.12), rgba(15,118,110,0.06));
+      font-size: 2.4rem;
+    }
+    a.modal-image-wrap { cursor: pointer; transition: border-color 0.2s; }
+    a.modal-image-wrap:hover { border-color: var(--accent); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
@@ -430,15 +545,19 @@
       #hero { padding: 0 1.5rem; padding-top: 5rem; }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
       .projects-grid { grid-template-columns: 1fr; }
+      .modal-content { padding: 1.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- BLOBS -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
 
   <!-- NAV -->
   <nav>
@@ -476,7 +595,7 @@
           <div class="stat-label">MSc CGPA</div>
         </div>
         <div>
-          <div class="stat-num">6<span>+</span></div>
+          <div class="stat-num">8<span>+</span></div>
           <div class="stat-label">Projects Built</div>
         </div>
         <div>
@@ -507,6 +626,7 @@
         <span class="skill-chip db">MongoDB</span>
         <span class="skill-chip db">RDBMS</span>
         <span class="skill-chip tool">SpringBoot</span>
+        <span class="skill-chip tool">FastAPI</span>
         <span class="skill-chip tool">Flask</span>
         <span class="skill-chip tool">OpenCV</span>
         <span class="skill-chip tool">Mediapipe</span>
@@ -524,106 +644,72 @@
       <div class="section-label">Things I've Built</div>
       <h2 class="section-title">Featured <span>Projects</span></h2>
     </div>
+
+    <div class="project-filters reveal" role="group" aria-label="Filter projects by category">
+      <button class="filter-btn active" type="button" data-filter="all">Show all</button>
+      <button class="filter-btn" type="button" data-filter="Full-Stack">Full-Stack</button>
+      <button class="filter-btn" type="button" data-filter="AI / ML">AI / ML</button>
+      <button class="filter-btn" type="button" data-filter="Game Dev">Game Dev</button>
+      <button class="filter-btn" type="button" data-filter="Client Build">Client Build</button>
+      <button class="filter-btn" type="button" data-filter="Mini Project">Mini Project</button>
+    </div>
+
     <div class="projects-grid">
 
-      <div class="project-card reveal">
-        <div class="project-badge badge-live">🔴 Live</div>
-        <div class="project-title">ElevateU — Mental Wellness Platform</div>
-        <p class="project-desc">A psychology wellness app with mood tracking, guided exercises, and mental health resources. Integrating an ML model for SWOT analysis to provide personalized wellness insights.</p>
-        <div class="project-tags">
-          <span class="project-tag">Java</span>
-          <span class="project-tag">Spring Boot</span>
-          <span class="project-tag">MySQL</span>
-          <span class="project-tag">ML</span>
-        </div>
+      <div class="project-card reveal" data-project="numerology" data-categories="Client Build,AI / ML" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for AI Numerology Report Generator">
+        <span class="project-badge badge-client">🔒 Client Tool</span>
+        <div class="project-card-title-sm">AI Numerology Report Generator</div>
+        <p class="project-card-blurb">Personal-use tool for a practicing numerologist — full report with Lo Shu grid in seconds.</p>
+        <div class="card-hint">View details →</div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-badge badge-live">🔴 Live</div>
-        <div class="project-title">SQLQuest — SQL Learning Game</div>
-        <p class="project-desc">A gamified SQL learning platform built in .NET/C# with level progression, score tracking, hints, and difficulty modes. Dynamic query validation with real-time feedback.</p>
-        <div class="project-tags">
-          <span class="project-tag">C#</span>
-          <span class="project-tag">.NET</span>
-          <span class="project-tag">SQL Server</span>
-        </div>
+      <div class="project-card reveal" data-project="elevateu" data-categories="Full-Stack,AI / ML" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for ElevateU">
+        <span class="project-badge badge-live">🔴 Live</span>
+        <div class="project-card-title-sm">ElevateU — Mental Wellness</div>
+        <p class="project-card-blurb">Mood tracking and guided exercises, with ML-driven wellness insights in progress.</p>
+        <div class="card-hint">View details →</div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-badge badge-major">⭐ Major</div>
-        <div class="project-title">Employee Management System</div>
-        <p class="project-desc">Full employee platform with login, attendance tracking, leave management, and auto payroll generation. Elegant glass-effect UI with system time-based login/logout.</p>
-        <div class="project-tags">
-          <span class="project-tag">Java</span>
-          <span class="project-tag">JSP</span>
-          <span class="project-tag">MySQL</span>
-        </div>
+      <div class="project-card reveal" data-project="sqlquest" data-categories="Full-Stack,Game Dev" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for SQLQuest">
+        <span class="project-badge badge-live">🔴 Live</span>
+        <div class="project-card-title-sm">SQLQuest — SQL Learning Game</div>
+        <p class="project-card-blurb">Gamified SQL practice with levels, hints, and real-time query validation.</p>
+        <div class="card-hint">View details →</div>
       </div>
 
-    <div class="project-card reveal">
-  <div class="project-badge badge-live">🔴 Live</div>
-
-  <div class="project-title">Emoji Diary — MERN Mood Journal</div>
-
-  <p class="project-desc">
-    A full-stack MERN diary application where users can track daily moods using draggable emojis and personalized diary entries. Features JWT authentication, MongoDB integration, responsive UI, and real-time diary updates with an interactive drag-and-drop experience.
-  </p>
-
-  <div class="project-tags">
-    <span class="project-tag">ReactJS</span>
-    <span class="project-tag">Node.js</span>
-    <span class="project-tag">Express.js</span>
-    <span class="project-tag">MongoDB</span>
-    <span class="project-tag">JWT</span>
-  </div>
-
-<div style="margin-top:1.2rem;">
- <a 
-  href="https://emoji-diary-three.vercel.app/"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="btn btn-primary"
-  style="padding:0.55rem 1rem; font-size:0.8rem; cursor:pointer; position:relative; z-index:1; user-select:none;"
->
-  View Live Project ↗
-</a>
-
-  </div>
-</div>
-
-      <div class="project-card reveal">
-        <div class="project-badge badge-mini">Mini Project</div>
-        <div class="project-title">Pacman — Hand Gesture Control</div>
-        <p class="project-desc">Classic Pacman game with real-time hand-gesture controls using OpenCV and Mediapipe — no keyboard needed. Custom maze logic, ghost AI, and optimized frame processing.</p>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">OpenCV</span>
-          <span class="project-tag">Mediapipe</span>
-          <span class="project-tag">Pygame</span>
-        </div>
+      <div class="project-card reveal" data-project="ems" data-categories="Full-Stack" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for Employee Management System">
+        <span class="project-badge badge-major">⭐ Major</span>
+        <div class="project-card-title-sm">Employee Management System</div>
+        <p class="project-card-blurb">Login, attendance, leave, and auto payroll — wrapped in a glass-effect UI.</p>
+        <div class="card-hint">View details →</div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-badge badge-mini">Mini Project</div>
-        <div class="project-title">Linear vs Random Forest Comparison</div>
-        <p class="project-desc">ML web app comparing Linear Regression and Random Forest with React frontend and Flask backend. Visualizes accuracy, MSE, and R² with side-by-side predictions.</p>
-        <div class="project-tags">
-          <span class="project-tag">ReactJS</span>
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Flask</span>
-          <span class="project-tag">Scikit-learn</span>
-        </div>
+      <div class="project-card reveal" data-project="emojidiary" data-categories="Full-Stack" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for Emoji Diary">
+        <span class="project-badge badge-live">🔴 Live</span>
+        <div class="project-card-title-sm">Emoji Diary — Mood Journal</div>
+        <p class="project-card-blurb">A MERN diary app with draggable emoji moods and JWT-secured entries.</p>
+        <div class="card-hint">View details →</div>
       </div>
 
-      <div class="project-card reveal">
-        <div class="project-badge badge-mini">Mini Project</div>
-        <div class="project-title">Bubble & Insertion Sort Visualizer</div>
-        <p class="project-desc">Interactive web app visualizing sorting algorithms step-by-step with animations and complexity analysis. User controls for array size, speed, and custom data.</p>
-        <div class="project-tags">
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">CSS</span>
-          <span class="project-tag">JavaScript</span>
-        </div>
+      <div class="project-card reveal" data-project="pacman" data-categories="Game Dev,AI / ML,Mini Project" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for Pacman gesture control">
+        <span class="project-badge badge-mini">Mini Project</span>
+        <div class="project-card-title-sm">Pacman — Gesture Control</div>
+        <p class="project-card-blurb">Hand-gesture controlled Pacman — next up, support for data glove input too.</p>
+        <div class="card-hint">View details →</div>
+      </div>
+
+      <div class="project-card reveal" data-project="mlcompare" data-categories="AI / ML,Mini Project" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for Linear vs Random Forest comparison">
+        <span class="project-badge badge-mini">Mini Project</span>
+        <div class="project-card-title-sm">Linear vs Random Forest</div>
+        <p class="project-card-blurb">Side-by-side model comparison with accuracy, MSE, and R² visualized.</p>
+        <div class="card-hint">View details →</div>
+      </div>
+
+      <div class="project-card reveal" data-project="sortviz" data-categories="Mini Project" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for Sort Visualizer">
+        <span class="project-badge badge-mini">Mini Project</span>
+        <div class="project-card-title-sm">Sort Visualizer</div>
+        <p class="project-card-blurb">Step-by-step animated Bubble & Insertion sort with complexity notes.</p>
+        <div class="card-hint">View details →</div>
       </div>
 
     </div>
@@ -759,6 +845,14 @@
     <p>Designed & Built by <strong style="color:var(--accent)">Shravani Shinde</strong> · Pune, India · 2025</p>
   </footer>
 
+  <!-- PROJECT DETAILS MODAL -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close project details">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
   <script>
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
@@ -782,6 +876,222 @@
       navLinks.forEach(a => {
         a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
       });
+    });
+
+    // ── PROJECT DETAILS DATA ──
+    // To add a real screenshot for a project, set `image` to its URL,
+    // e.g. image: 'https://yourdomain.com/screenshots/numerology.png'
+    // Until then, a styled placeholder (using `icon`) is shown instead.
+    // If `link` is set, the image becomes clickable and opens that link.
+    const projectData = {
+      numerology: {
+        badge: '🔒 Client Tool',
+        icon: '🔢',
+        image: 'images/numerology.png',
+        title: 'AI Numerology Report Generator',
+        summary: "Built for personal use by a practicing numerologist who was generating reports by hand. The brief: take a name and date of birth, run the full numerology calculation set, and hand back a polished report that reads like it was written by an expert — in seconds, not hours.<br><br>Rather than depending on a rate-limited LLM call for the writing, the report's content is pulled from a structured knowledge base built from the numerologist's own reference material, so output is consistent every time. Next up on the roadmap: automated email delivery of reports straight to clients.",
+        highlights: [
+          'Cut report creation time from roughly 2 hours of manual writing to about 30 seconds per report',
+          'Parsed 60+ domain reference PDFs into a structured Python knowledge base using pdfplumber, replacing a quota-limited Gemini API call with deterministic lookups',
+          'Implemented the core calculation engine: psychic number, destiny number, name number (Pythagorean chart), angel number, and the Lo Shu grid layout',
+          'Built dual export — an editable Word document via python-docx and a client-ready PDF via ReportLab — generated from a single data pipeline',
+          'Planned next: automated email delivery so reports go straight to clients once generated'
+        ],
+        tags: ['FastAPI', 'React', 'pdfplumber', 'python-docx', 'ReportLab'],
+        privateNote: 'Built for one numerologist\'s personal, day-to-day use — not a public product, so there\'s no live link to share.'
+      },
+      elevateu: {
+        badge: '🔴 Live',
+        icon: '🌱',
+        image: 'images/elevateu.png',
+        title: 'ElevateU — Mental Wellness Platform',
+        summary: 'A psychology-focused wellness app built to give users a simple daily touchpoint with their own mental health — mood tracking, guided exercises, and a library of resources, backed by a Java/Spring Boot service layer.',
+        highlights: [
+          'Daily mood tracking with a visual history view',
+          'Guided exercise library for stress and anxiety management',
+          'ML model integration in progress for SWOT-style personalized wellness insights',
+          'Java + Spring Boot backend with MySQL for persistence'
+        ],
+        tags: ['Java', 'Spring Boot', 'MySQL', 'ML'],
+      },
+      sqlquest: {
+        badge: '🔴 Live',
+        icon: '🗃️',
+        image: 'images/sqlquest.png',
+        title: 'SQLQuest — SQL Learning Game',
+        summary: 'A gamified way to learn SQL: instead of static exercises, users progress through levels with scoring, hints, and difficulty modes, while every query they write is validated dynamically against the expected result.',
+        highlights: [
+          'Level progression system with score tracking across difficulty tiers',
+          'In-game hint system to nudge learners without giving away the answer',
+          'Dynamic query validation with real-time feedback on correctness',
+          'Built on .NET / C# with SQL Server as the query backend'
+        ],
+        tags: ['C#', '.NET', 'SQL Server'],
+      },
+      ems: {
+        badge: '⭐ Major Project',
+        icon: '🏢',
+        image: 'images/ems.png',
+        title: 'Employee Management System',
+        summary: 'A complete internal tool covering the day-to-day administrative loop for a small organization — login, attendance, leave, and payroll — wrapped in a clean glass-effect interface.',
+        highlights: [
+          'Role-based login with system time-based check-in / check-out tracking',
+          'Attendance tracking tied directly to login sessions',
+          'Leave management workflow for requests and approvals',
+          'Automatic payroll generation based on attendance records',
+          'Glass-effect UI built with Java + JSP, backed by MySQL'
+        ],
+        tags: ['Java', 'JSP', 'MySQL'],
+      },
+      emojidiary: {
+        badge: '🔴 Live',
+        icon: '📔',
+        image: 'images/emojidiary.png',
+        title: 'Emoji Diary — MERN Mood Journal',
+        summary: 'A daily journaling app that replaces dry mood dropdowns with a draggable emoji picker, paired with free-text diary entries — built end-to-end on the MERN stack with proper authentication.',
+        highlights: [
+          'Drag-and-drop emoji mood selection for a more expressive daily check-in',
+          'JWT-based authentication to keep entries private per user',
+          'MongoDB for flexible, per-entry diary storage',
+          'Responsive UI with real-time updates as entries are added or edited'
+        ],
+        tags: ['ReactJS', 'Node.js', 'Express.js', 'MongoDB', 'JWT'],
+        link: { href: 'https://emoji-diary-three.vercel.app/', label: 'Open live demo ↗' }
+      },
+      pacman: {
+        badge: 'Mini Project',
+        icon: '👾',
+        image: 'images/pacman.png',
+        title: 'Pacman — Hand Gesture Control',
+        summary: "A reimplementation of the Pacman classic with the keyboard removed entirely — the maze is currently navigated purely with hand gestures, tracked in real time through the webcam. Next up: extending control support to a physical data glove alongside the existing camera-based tracking.",
+        highlights: [
+          'Real-time hand-gesture recognition using OpenCV and Mediapipe',
+          'Custom maze logic and ghost AI built from scratch',
+          'Frame processing optimized to keep gesture-to-movement latency low',
+          'No keyboard or controller required to play',
+          'Planned: data glove support as an alternate input method alongside webcam tracking'
+        ],
+        tags: ['Python', 'OpenCV', 'Mediapipe', 'Pygame'],
+      },
+      mlcompare: {
+        badge: 'Mini Project',
+        icon: '📊',
+        image: 'images/mlcompare.png',
+        title: 'Linear vs Random Forest Comparison',
+        summary: 'A small ML web app built to make model comparison tangible — pick a dataset, run both a Linear Regression and a Random Forest model, and see exactly where they agree and where they diverge.',
+        highlights: [
+          'Side-by-side predictions from both models on the same input',
+          'Visualized accuracy, MSE, and R² metrics for direct comparison',
+          'React frontend talking to a Flask + Scikit-learn backend',
+          'Useful as a teaching tool for understanding model tradeoffs'
+        ],
+        tags: ['ReactJS', 'Python', 'Flask', 'Scikit-learn'],
+      },
+      sortviz: {
+        badge: 'Mini Project',
+        icon: '🔀',
+        image: 'images/sortviz.png',
+        title: 'Bubble & Insertion Sort Visualizer',
+        summary: 'An interactive teaching tool that turns two classic sorting algorithms into something you can actually watch happen, step by step, with the underlying complexity laid out alongside the animation.',
+        highlights: [
+          'Step-by-step animated visualization of Bubble Sort and Insertion Sort',
+          'Adjustable array size and animation speed',
+          'Support for custom user-entered data, not just random arrays',
+          'Built with plain HTML, CSS, and JavaScript — no framework overhead'
+        ],
+        tags: ['HTML', 'CSS', 'JavaScript'],
+      }
+    };
+
+    // ── MODAL LOGIC ──
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+    let lastFocusedEl = null;
+
+    function renderModal(id) {
+      const d = projectData[id];
+      if (!d) return '';
+      const highlightsHtml = (d.highlights || []).map(h => `<li>${h}</li>`).join('');
+      const tagsHtml = (d.tags || []).map(t => `<span class="project-tag">${t}</span>`).join('');
+      const linkHtml = d.link ? `<a class="modal-link" href="${d.link.href}" target="_blank" rel="noopener noreferrer">${d.link.label}</a>` : '';
+      const privateNoteHtml = d.privateNote ? `<p class="modal-private-note">${d.privateNote}</p>` : '';
+
+      // Image banner: real screenshot if `image` is set, otherwise a placeholder icon.
+      // Wrapped in a link when one is available, so the image itself is clickable.
+      const imageInner = d.image
+        ? `<img src="${d.image}" alt="${d.title} screenshot" />`
+        : `<div class="modal-image-placeholder">${d.icon || '🗂️'}</div>`;
+      const imageHtml = d.link
+        ? `<a class="modal-image-wrap" href="${d.link.href}" target="_blank" rel="noopener noreferrer" aria-label="Open ${d.title}">${imageInner}</a>`
+        : `<div class="modal-image-wrap">${imageInner}</div>`;
+
+      return `
+        ${imageHtml}
+        <div class="project-badge badge-major" style="background:rgba(79,70,229,0.12);">${d.badge}</div>
+        <h3 class="modal-title" id="modalTitle">${d.title}</h3>
+        <p class="modal-summary">${d.summary}</p>
+        <div class="modal-heading">Key Highlights</div>
+        <ul class="modal-highlights">${highlightsHtml}</ul>
+        <div class="modal-heading">Tech Stack</div>
+        <div class="modal-tags">${tagsHtml}</div>
+        ${linkHtml}
+        ${privateNoteHtml}
+      `;
+    }
+
+    function openProjectModal(id) {
+      if (!projectData[id]) return;
+      lastFocusedEl = document.activeElement;
+      modalBody.innerHTML = renderModal(id);
+      modalOverlay.classList.add('active');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+
+    function closeProjectModal() {
+      modalOverlay.classList.remove('active');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocusedEl) lastFocusedEl.focus();
+    }
+
+    document.querySelectorAll('[data-project]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return; // let real links (e.g. live demo) work normally
+        openProjectModal(card.dataset.project);
+      });
+      card.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')) {
+          e.preventDefault();
+          openProjectModal(card.dataset.project);
+        }
+      });
+    });
+
+    // ── PROJECT FILTER LOGIC ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterableCards = document.querySelectorAll('.project-card[data-categories]');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        filterableCards.forEach(card => {
+          const cats = (card.dataset.categories || '').split(',').map(c => c.trim());
+          const show = filter === 'all' || cats.includes(filter);
+          card.classList.toggle('hidden-by-filter', !show);
+        });
+      });
+    });
+
+    modalClose.addEventListener('click', closeProjectModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeProjectModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeProjectModal();
     });
   </script>
 </body>
