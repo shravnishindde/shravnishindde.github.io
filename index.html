@@ -374,6 +374,150 @@
     .cert-name { font-size: 0.88rem; font-weight: 500; }
     .cert-issuer { font-size: 0.75rem; color: var(--muted); }
 
+    /* ── BLOG ── */
+    #blog { background: var(--bg); border-top: 1px solid var(--border); }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .blog-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover { transform: translateY(-5px); box-shadow: 0 20px 48px rgba(15,23,42,0.10); border-color: var(--accent); }
+
+    .blog-cover {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-cover.cisco  { background: linear-gradient(140deg, #00275e 0%, #0076ce 60%, #1de9c3 100%); }
+    .blog-cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%); }
+    .blog-cover-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-60%); font-size: 3.8rem; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25)); z-index: 1; }
+    .blog-cover-label {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .cover-tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 100px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); color: #fff; backdrop-filter: blur(4px); }
+
+    .blog-body { padding: 1.5rem 1.6rem 1.8rem; flex: 1; display: flex; flex-direction: column; }
+    .blog-meta-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .blog-date { font-size: 0.75rem; color: var(--muted); }
+    .blog-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+    .blog-readtime { font-size: 0.75rem; color: var(--muted); }
+
+    .blog-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.12rem; letter-spacing: -0.02em; line-height: 1.35; color: var(--text); margin-bottom: 0.65rem; }
+    .blog-excerpt { font-size: 0.86rem; color: var(--muted); line-height: 1.75; flex: 1; margin-bottom: 1.3rem; }
+    .blog-footer { display: flex; align-items: center; justify-content: space-between; }
+    .blog-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .blog-chip { font-size: 0.7rem; padding: 0.2rem 0.55rem; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
+    .blog-cta { font-size: 0.8rem; font-weight: 600; color: var(--accent); white-space: nowrap; transition: letter-spacing 0.2s; }
+    .blog-card:hover .blog-cta { letter-spacing: 0.02em; }
+
+    /* BLOG MODAL */
+    .bm-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 2rem 1.5rem;
+      overflow-y: auto;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.28s, visibility 0.28s;
+    }
+    .bm-overlay.open { opacity: 1; visibility: visible; }
+
+    .bm-box {
+      width: 100%; max-width: 740px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      margin: auto;
+      transform: translateY(20px) scale(0.975);
+      transition: transform 0.28s;
+    }
+    .bm-overlay.open .bm-box { transform: translateY(0) scale(1); }
+
+    .bm-hero {
+      width: 100%; height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .bm-hero.cisco { background: linear-gradient(140deg, #00275e 0%, #0076ce 60%, #1de9c3 100%); }
+    .bm-hero-icon { font-size: 4.5rem; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.3)); }
+    .bm-close {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(6px); color: #fff;
+      font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .bm-close:hover { background: rgba(255,255,255,0.32); }
+
+    .bm-content { padding: 2.2rem 2.8rem 3rem; }
+    .bm-meta { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+    .bm-tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; padding: 0.22rem 0.7rem; border-radius: 100px; background: rgba(79,70,229,0.1); color: var(--accent); }
+    .bm-date { font-size: 0.78rem; color: var(--muted); }
+    .bm-rt { font-size: 0.78rem; color: var(--muted); }
+
+    .bm-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.75rem; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 1.4rem; padding-right: 1rem; }
+
+    /* Blog prose */
+    .bm-prose { font-size: 0.94rem; line-height: 1.9; color: var(--muted); }
+    .bm-prose p { margin-bottom: 1.1rem; }
+    .bm-prose strong { color: var(--text); font-weight: 500; }
+    .bm-prose em { font-style: italic; }
+
+    .bm-prose h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.08rem; letter-spacing: -0.02em;
+      color: var(--text); margin: 1.8rem 0 0.7rem;
+    }
+    .bm-prose h3:first-child { margin-top: 0; }
+
+    .bm-pullquote {
+      border-left: 3px solid var(--accent);
+      margin: 1.4rem 0;
+      padding: 0.6rem 1.2rem;
+      font-style: italic;
+      font-size: 0.96rem;
+      color: var(--text);
+      background: rgba(79,70,229,0.04);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .bm-note {
+      background: rgba(15,118,110,0.06);
+      border: 1px solid rgba(15,118,110,0.2);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin: 1.2rem 0;
+      line-height: 1.7;
+    }
+    .bm-note strong { color: var(--accent3); }
+
+    .bm-tags-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 2.2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .bm-tag-pill { font-size: 0.74rem; padding: 0.28rem 0.75rem; border-radius: 100px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
+
+    
     /* ── CONTACT ── */
     #contact { text-align: center; }
     .contact-links {
@@ -565,6 +709,7 @@
     <ul class="nav-links">
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#internships">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -714,6 +859,275 @@
 
     </div>
   </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="reveal">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">From the <span>Blog</span></h2>
+    </div>
+    <div class="blog-grid">
+
+      <div class="blog-card reveal" data-blog="analytics-mindset" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="blog-cover cisco">
+          <span class="blog-cover-icon">📊</span>
+          <div class="blog-cover-label">
+            <span class="cover-tag">Data Analytics</span>
+            <span class="cover-tag">Cisco NetAcad</span>
+          </div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta-row">
+            <span class="blog-date">June 27, 2026</span>
+            <span class="blog-sep"></span>
+            <span class="blog-readtime">5 min read</span>
+          </div>
+          <div class="blog-title">Analytics isn't just about dashboards — and it took a Cisco course to make that click</div>
+          <p class="blog-excerpt">I started the Data Analytics Essentials course this week and finished Module 1. One idea from it actually changed how I think about the ML work I've already done.</p>
+          <div class="blog-footer">
+            <div class="blog-chips">
+              <span class="blog-chip">Analytics</span>
+              <span class="blog-chip">ML</span>
+              <span class="blog-chip">Learning</span>
+            </div>
+            <span class="blog-cta">Read →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="education" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="reveal">
+      <div class="section-label">Academic Journey</div>
+      <h2 class="section-title">Education <span>Timeline</span></h2>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item reveal"><div><div class="edu-degree">MSc — Computer Science</div><div class="edu-school">Fergusson College, Pune · 2025–2027</div></div><div class="edu-score">9.60<small>CGPA</small></div></div>
+      <div class="edu-item reveal"><div><div class="edu-degree">BSc — Computer Science</div><div class="edu-school">St Mira's College For Girls, Pune · 2022–2025</div></div><div class="edu-score">9.83<small>CGPA</small></div></div>
+      <div class="edu-item reveal"><div><div class="edu-degree">HSC (12th)</div><div class="edu-school">Abasaheb Garware College, Pune · 2022</div></div><div class="edu-score">73.6%<small>Percentage</small></div></div>
+      <div class="edu-item reveal"><div><div class="edu-degree">SSC (10th)</div><div class="edu-school">St Joseph's Convent School, Pune · 2020</div></div><div class="edu-score">91.4%<small>Percentage</small></div></div>
+    </div>
+  </section>
+
+  <section id="internships">
+    <div class="reveal">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Internships & <span>Activities</span></h2>
+    </div>
+    <div class="intern-list">
+      <div class="intern-item reveal"><div class="intern-title">Data Visualization & AI Tools Internship</div><div class="intern-org">CSRBOX Micro Internship</div></div>
+      <div class="intern-item reveal"><div class="intern-title">AI / ML Internship Program</div><div class="intern-org">IBM Skills Build</div></div>
+      <div class="intern-item reveal"><div class="intern-title">Placement Assistance Program Internship</div><div class="intern-org">CSRBOX Micro Internship</div></div>
+      <div class="intern-item reveal" style="border-left-color:var(--accent2);"><div class="intern-title">Placement Representative</div><div class="intern-org">B.Sc Computer Science — St Mira's College For Girls</div></div>
+    </div>
+  </section>
+
+  <section id="certifications" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div class="reveal">
+      <div class="section-label">Verified Learning</div>
+      <h2 class="section-title">Achievements & <span>Certifications</span></h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card reveal"><div class="cert-icon">🔵</div><div><div class="cert-name">Computer Networking Basics</div><div class="cert-issuer">IBM SkillsBuild</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">☁️</div><div><div class="cert-name">Oracle Cloud Infrastructure AI Foundations</div><div class="cert-issuer">Oracle</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">🍍</div><div><div class="cert-name">Student Connect Program</div><div class="cert-issuer">Bluepineapple</div></div></div>
+      <div class="cert-card reveal"><div class="cert-icon">🤖</div><div><div class="cert-name">AI / ML Internship Certification</div><div class="cert-issuer">IBM Skills Build</div></div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="reveal">
+      <div class="section-label">Let's Connect</div>
+      <h2 class="section-title">Get in <span>Touch</span></h2>
+      <p style="color:var(--muted);max-width:500px;margin:0 auto 1rem;">Open to internship opportunities, collaborations, and interesting projects. Let's build something great together!</p>
+    </div>
+    <div class="contact-links reveal">
+      <a href="mailto:shravnishindde01@gmail.com" class="contact-link">✉️ shravnishindde01@gmail.com</a>
+      <a href="https://www.linkedin.com/in/shravni-shindde/" target="_blank" class="contact-link">💼 LinkedIn</a>
+      <a href="https://github.com/shravnishindde" target="_blank" class="contact-link">🐙 GitHub</a>
+      <a href="tel:+919028871267" class="contact-link">📞 +91 9028871267</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Designed & Built by <strong style="color:var(--accent)">Shravani Shinde</strong> · Pune, India · 2026</p>
+  </footer>
+
+  <!-- PROJECT MODAL -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- BLOG MODAL -->
+  <div class="bm-overlay" id="bmOverlay" aria-hidden="true">
+    <div class="bm-box" role="dialog" aria-modal="true" aria-labelledby="bmTitle">
+      <div id="bmInner"></div>
+    </div>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 55); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+
+    // Nav highlight
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      document.querySelectorAll('section[id]').forEach(s => { if (scrollY >= s.offsetTop - 110) cur = s.id; });
+      document.querySelectorAll('.nav-links a').forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : ''; });
+    });
+
+    // ── PROJECT DATA ──
+    const projectData = {
+      numerology: { badge:'🔒 Client Tool', icon:'🔢', image:'images/numerology.png', title:'AI Numerology Report Generator', summary:"Built for a practicing numerologist who was spending hours generating reports by hand. Give it a name and date of birth — it runs the full calculation set and produces a polished report in under a minute.", highlights:['Cut report time from ~2 hours to under 60 seconds','Parsed 60+ reference PDFs into a structured knowledge base using pdfplumber','Full engine: psychic number, destiny, name number, angel number, Lo Shu grid','Dual export — Word via python-docx, PDF via ReportLab','Planned: email delivery direct to clients'], tags:['FastAPI','React','pdfplumber','python-docx','ReportLab'], privateNote:"Private tool — not a public product." },
+      elevateu: { badge:'🔴 Live', icon:'🌱', image:'images/elevateu.png', title:'ElevateU — Mental Wellness Platform', summary:'Wellness app with mood tracking, guided exercises, and mental health resources. ML SWOT analysis integration in progress.', highlights:['Daily mood tracking with visual history','Guided exercise library for stress management','ML model for personalised wellness insights (in progress)','Java + Spring Boot + MySQL backend'], tags:['Java','Spring Boot','MySQL','ML'] },
+      sqlquest: { badge:'🔴 Live', icon:'🗃️', image:'images/sqlquest.png', title:'SQLQuest — SQL Learning Game', summary:'Gamified SQL learning with level progression, hints, and dynamic query validation against expected results.', highlights:['Level system with difficulty tiers','In-game hint system','Real-time query validation and feedback','.NET / C# with SQL Server'], tags:['C#','.NET','SQL Server'] },
+      ems: { badge:'⭐ Major Project', icon:'🏢', image:'images/ems.png', title:'Employee Management System', summary:'Full internal HR tool — login, attendance, leave management, and auto payroll in one glass-effect interface.', highlights:['Role-based login with time-based check-in/out','Leave management workflow','Auto payroll from attendance records','Java + JSP + MySQL'], tags:['Java','JSP','MySQL'] },
+      emojidiary: { badge:'🔴 Live', icon:'📔', image:'images/emojidiary.png', title:'Emoji Diary — MERN Mood Journal', summary:'Journaling app with a draggable emoji mood picker and JWT-secured entries on the MERN stack.', highlights:['Drag-and-drop emoji selection','JWT auth','MongoDB storage','Responsive real-time UI'], tags:['ReactJS','Node.js','Express.js','MongoDB','JWT'], link:{href:'https://emoji-diary-three.vercel.app/',label:'Open live demo ↗'} },
+      pacman: { badge:'Mini Project', icon:'👾', image:'images/pacman.png', title:'Pacman — Hand Gesture Control', summary:'Classic Pacman with the keyboard removed — played entirely through hand gestures tracked via webcam.', highlights:['OpenCV + Mediapipe gesture recognition','Custom maze and ghost AI','Optimised for low-latency response','Planned: data glove input'], tags:['Python','OpenCV','Mediapipe','Pygame'] },
+      mlcompare: { badge:'Mini Project', icon:'📊', image:'images/mlcompare.png', title:'Linear vs Random Forest Comparison', summary:'Web app that runs Linear Regression and Random Forest side-by-side on user-uploaded data, with metrics visualized.', highlights:['Side-by-side predictions','Accuracy, MSE, R² visualized','React + Flask + Scikit-learn','Useful teaching tool'], tags:['ReactJS','Python','Flask','Scikit-learn'] },
+      sortviz: { badge:'Mini Project', icon:'🔀', image:'images/sortviz.png', title:'Bubble & Insertion Sort Visualizer', summary:'Step-by-step sorting animation with complexity analysis, custom data support, and speed controls.', highlights:['Animated Bubble & Insertion Sort','Speed and array size controls','Custom input support','Plain HTML/CSS/JS'], tags:['HTML','CSS','JavaScript'] }
+    };
+
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalBody    = document.getElementById('modalBody');
+    const modalClose   = document.getElementById('modalClose');
+    let lastFocus = null;
+
+    function openProject(id) {
+      const d = projectData[id]; if (!d) return;
+      lastFocus = document.activeElement;
+      const hi = (d.highlights||[]).map(h=>`<li>${h}</li>`).join('');
+      const tg = (d.tags||[]).map(t=>`<span class="project-tag">${t}</span>`).join('');
+      const lk = d.link ? `<a class="modal-link" href="${d.link.href}" target="_blank" rel="noopener">${d.link.label}</a>` : '';
+      const pn = d.privateNote ? `<p class="modal-private-note">${d.privateNote}</p>` : '';
+      const img = d.image ? `<img src="${d.image}" alt="${d.title}"/>` : `<div class="modal-image-placeholder">${d.icon}</div>`;
+      const imgW = d.link ? `<a class="modal-image-wrap" href="${d.link.href}" target="_blank" rel="noopener">${img}</a>` : `<div class="modal-image-wrap">${img}</div>`;
+      modalBody.innerHTML = `${imgW}<div class="project-badge badge-major">${d.badge}</div><h3 class="modal-title">${d.title}</h3><p class="modal-summary">${d.summary}</p><div class="modal-heading">Key Highlights</div><ul class="modal-highlights">${hi}</ul><div class="modal-heading">Tech Stack</div><div class="modal-tags">${tg}</div>${lk}${pn}`;
+      modalOverlay.classList.add('active'); modalOverlay.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden'; modalClose.focus();
+    }
+    function closeProject() {
+      modalOverlay.classList.remove('active'); modalOverlay.setAttribute('aria-hidden','true');
+      document.body.style.overflow = ''; if (lastFocus) lastFocus.focus();
+    }
+    document.querySelectorAll('[data-project]').forEach(c => {
+      c.addEventListener('click', e => { if (!e.target.closest('a')) openProject(c.dataset.project); });
+      c.addEventListener('keydown', e => { if ((e.key==='Enter'||e.key===' ') && !e.target.closest('a')) { e.preventDefault(); openProject(c.dataset.project); }});
+    });
+    modalClose.addEventListener('click', closeProject);
+    modalOverlay.addEventListener('click', e => { if (e.target===modalOverlay) closeProject(); });
+
+    // ── BLOG DATA ──
+    const blogData = {
+      'analytics-mindset': {
+        heroClass: 'cisco',
+        heroIcon: '📊',
+        tag: 'Data Analytics',
+        date: 'June 27, 2026',
+        readtime: '5 min read',
+        title: "Analytics isn't just about dashboards — and it took a Cisco course to make that click",
+        body: `
+          <p>I started Cisco's Data Analytics Essentials course this week. Honestly, I signed up mostly to tick a box — I've worked with data in projects before, used Scikit-learn, built visualizations, done an internship around data tools. I figured the first module would be review.</p>
+
+          <p>It mostly was. But there was one framework in it that I haven't been able to stop thinking about since.</p>
+
+          <h3>The four types of analytics</h3>
+
+          <p>The course laid out analytics across four levels: <strong>descriptive</strong> (what happened), <strong>diagnostic</strong> (why it happened), <strong>predictive</strong> (what will happen), and <strong>prescriptive</strong> (what should we do about it).</p>
+
+          <div class="bm-pullquote">Most dashboards only answer the first question. Real analytical value starts at the third.</div>
+
+          <p>I knew these terms existed. But seeing them laid out as a progression — and realising that most of the "data work" I'd seen in internships and coursework was sitting firmly at level one — was a bit of a jolt.</p>
+
+          <h3>Where my own projects actually land</h3>
+
+          <p>I went back and thought about the ML comparison tool I built — Linear Regression vs Random Forest on uploaded datasets. I'd framed it as a learning project, something to understand model tradeoffs. But if I'm honest about what it actually does: it's prescriptive. You give it data, it tells you which model to trust and why. That's not nothing.</p>
+
+          <p>Same with the ElevateU wellness app I'm working on. The mood tracking part is pure descriptive analytics. But the ML model I'm building for it — SWOT-style personalised insights — that's trying to be prescriptive. Knowing that framing now makes the design decisions clearer. It's not just "add an ML model." It's answering a specific question: <em>given what I know about this person's patterns, what should they do differently?</em></p>
+
+          <h3>The real-time vs batch trade-off</h3>
+
+          <p>The other thing the module covered well was real-time analytics vs batch processing. I'd encountered this before in a vague way, but the course put it plainly: streaming is faster but harder to validate, batch is slower but more reliable. The right choice depends entirely on how quickly the decision needs to be made.</p>
+
+          <p>For a wellness app, batch is fine — nobody needs their mood trend updated to the millisecond. For fraud detection or live sports analytics, you can't wait. I'd never thought about it that way explicitly, and now I'll probably never not think about it that way.</p>
+
+          <div class="bm-note"><strong>Up next:</strong> Module 2 is about data gathering and investigation — which is where the labs start. 29 labs across the full course, so it should get properly hands-on from here.</div>
+
+          <p>Module 1 done. Nothing groundbreaking, but sometimes the right framework at the right time is exactly what you need.</p>
+        `,
+        tags: ['Data Analytics','Cisco NetAcad','Machine Learning','Real-Time vs Batch','ElevateU']
+      }
+    };
+
+    const bmOverlay = document.getElementById('bmOverlay');
+    const bmInner   = document.getElementById('bmInner');
+    let lastBlogFocus = null;
+
+    function openBlog(id) {
+      const d = blogData[id]; if (!d) return;
+      lastBlogFocus = document.activeElement;
+      const tagsHtml = d.tags.map(t => `<span class="bm-tag-pill">${t}</span>`).join('');
+      bmInner.innerHTML = `
+        <div class="bm-hero ${d.heroClass}">
+          <button class="bm-close" id="bmClose" aria-label="Close">✕</button>
+          <span class="bm-hero-icon">${d.heroIcon}</span>
+        </div>
+        <div class="bm-content">
+          <div class="bm-meta">
+            <span class="bm-tag">${d.tag}</span>
+            <span class="blog-sep"></span>
+            <span class="bm-date">${d.date}</span>
+            <span class="blog-sep"></span>
+            <span class="bm-rt">${d.readtime}</span>
+          </div>
+          <h2 class="bm-title" id="bmTitle">${d.title}</h2>
+          <div class="bm-prose">${d.body}</div>
+          <div class="bm-tags-row">${tagsHtml}</div>
+        </div>`;
+      bmOverlay.classList.add('open'); bmOverlay.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden'; bmOverlay.scrollTop = 0;
+      document.getElementById('bmClose').addEventListener('click', closeBlog);
+    }
+    function closeBlog() {
+      bmOverlay.classList.remove('open'); bmOverlay.setAttribute('aria-hidden','true');
+      document.body.style.overflow = ''; if (lastBlogFocus) lastBlogFocus.focus();
+    }
+    document.querySelectorAll('[data-blog]').forEach(c => {
+      c.addEventListener('click', () => openBlog(c.dataset.blog));
+      c.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); openBlog(c.dataset.blog); }});
+    });
+    bmOverlay.addEventListener('click', e => { if (e.target===bmOverlay) closeBlog(); });
+    document.addEventListener('keydown', e => {
+      if (e.key==='Escape') {
+        if (modalOverlay.classList.contains('active')) closeProject();
+        if (bmOverlay.classList.contains('open')) closeBlog();
+      }
+    });
+
+    // Project filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterCards = document.querySelectorAll('.project-card[data-categories]');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
+        const f = btn.dataset.filter;
+        filterCards.forEach(c => {
+          const cats = (c.dataset.categories||'').split(',').map(x=>x.trim());
+          c.classList.toggle('hidden-by-filter', f!=='all' && !cats.includes(f));
+        });
+      });
+    });
+  </script>
+</body>
+</html
 
   <!-- EDUCATION -->
   <section id="education" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
