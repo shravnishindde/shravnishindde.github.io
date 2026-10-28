@@ -732,6 +732,19 @@
   <p class="project-card-blurb">Data cleaning, EDA, and ML modelling on a real-world dataset, validated with proper metrics.</p>
   <div class="card-hint">View details →</div>
 </div>
+<div class="project-card reveal" data-project="carprice" data-categories="AI / ML,Mini Project" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for Used Car Price Predictor">
+  <span class="project-badge badge-mini">Mini Project</span>
+  <div class="project-card-title-sm">Used Car Price Predictor</div>
+  <p class="project-card-blurb">Linear Regression model on 816 used-car listings, served through a Flask web app.</p>
+  <div class="card-hint">View details →</div>
+</div>
+
+<div class="project-card reveal" data-project="movierec" data-categories="AI / ML,Mini Project" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Open details for Movie Recommender System">
+  <span class="project-badge badge-mini">Mini Project</span>
+  <div class="project-card-title-sm">Movie Recommender System</div>
+  <p class="project-card-blurb">Content-based recommender over 4,797 TMDB movies, with posters in a Streamlit app.</p>
+  <div class="card-hint">View details →</div>
+</div>
     </div>
   </section>
 
@@ -1060,6 +1073,34 @@ cognifyz: {
     'Documented the findings for each task'
   ],
   tags: ['Python', 'Pandas', 'NumPy', 'Scikit-learn'],
+},
+      carprice: {
+  badge: 'Mini Project',
+  icon: '🚗',
+  // image: 'images/carprice.png',
+  title: 'Used Car Price Predictor',
+  summary: 'A regression project that predicts the resale price of a used car from a cleaned dataset of 816 listings, then serves the trained model behind a simple Flask web app.',
+  highlights: [
+    'Trained a Linear Regression model on 816 cleaned listings, with a 5-fold cross-validated R² of 0.50',
+    'Compared plain vs log-transformed price (no gain) and traced the weakest fold to an extreme-price outlier',
+    'Fixed a scikit-learn version incompatibility by retraining the model',
+    'Runs behind a Flask web app that returns a predicted price'
+  ],
+  tags: ['Python', 'Pandas', 'Scikit-learn', 'Flask'],
+},
+movierec: {
+  badge: 'Mini Project',
+  icon: '🎬',
+  // image: 'images/movierec.png',
+  title: 'Movie Recommender System',
+  summary: 'A content-based recommendation engine that finds movies similar to one you pick, by comparing what each film is about rather than relying on user ratings.',
+  highlights: [
+    'Built over 4,797 TMDB movies, combining overview, genres, keywords, top-3 cast and director into text tags stemmed with NLTK',
+    'Vectorised tags with CountVectorizer (5,000 features) and ranked movies by cosine similarity to return the top 5 matches',
+    'Served as a Streamlit app that fetches posters from the TMDB API',
+    'Fixed deprecated Streamlit usage, moved the API key to an environment variable and handled missing posters'
+  ],
+  tags: ['Python', 'Pandas', 'Scikit-learn', 'NLTK', 'Streamlit'],
 },
     };
 
